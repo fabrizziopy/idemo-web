@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estudio Morales & Asociados — Asesoría Contable · Asunción</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --white: #ffffff;
+      --ink: #1a1a18;
+      --ink-light: #5a5a56;
+      --accent: #2d5a3d;
+      --accent-light: #eef4f0;
+      --border: #e8e8e4;
+      --rule: #d0d0c8;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,250,248,.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: -.2px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 13px; font-weight: 400; color: var(--ink-light); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { font-size: 13px; font-weight: 500; color: var(--accent); border: 1px solid var(--accent); padding: 8px 20px; text-decoration: none; transition: background .2s, color .2s; }
+    .nav-cta:hover { background: var(--accent); color: white; }
+
+    /* HERO */
+    .hero { padding: 160px 40px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1100px; margin: 0 auto; align-items: center; }
+    .hero-label { font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5vw, 56px); font-weight: 600; line-height: 1.18; letter-spacing: -.5px; margin-bottom: 24px; }
+    .hero-headline em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 16px; font-weight: 300; color: var(--ink-light); line-height: 1.8; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: white; font-size: 14px; font-weight: 500; padding: 14px 28px; text-decoration: none; transition: background .2s; display: inline-block; }
+    .btn-primary:hover { background: #1e3d2a; }
+    .btn-text { font-size: 14px; color: var(--ink-light); text-decoration: none; border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+    .btn-text:hover { color: var(--ink); border-color: var(--ink); }
+    .hero-right { background: var(--white); border: 1px solid var(--border); padding: 40px; }
+    .hero-card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .hero-card-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .hero-card-item:last-child { border-bottom: none; }
+    .card-item-label { font-size: 13px; color: var(--ink-light); }
+    .card-item-val { font-size: 13px; font-weight: 500; color: var(--ink); text-align: right; }
+    .card-badge { font-size: 11px; font-weight: 500; background: var(--accent-light); color: var(--accent); padding: 3px 10px; display: inline-block; margin-top: 4px; }
+
+    /* SECTION */
+    section { padding: 80px 40px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+    .section-sub { font-size: 15px; font-weight: 300; color: var(--ink-light); line-height: 1.8; max-width: 500px; }
+
+    /* SERVICIOS */
+    #servicios { background: var(--white); border-top: 1px solid var(--border); }
+    .services-list { margin-top: 48px; }
+    .service-row { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 32px; align-items: center; padding: 28px 0; border-top: 1px solid var(--border); }
+    .service-row:last-child { border-bottom: 1px solid var(--border); }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; }
+    .service-desc { font-size: 14px; font-weight: 300; color: var(--ink-light); line-height: 1.7; }
+    .service-detail { font-size: 12px; color: var(--accent); font-weight: 500; text-align: right; }
+
+    /* EQUIPO */
+    #equipo { background: var(--bg); border-top: 1px solid var(--border); }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; margin-top: 48px; }
+    .team-card { background: var(--white); border: 1px solid var(--border); padding: 32px; }
+    .team-initial { width: 56px; height: 56px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
+    .team-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+    .team-role { font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+    .team-desc { font-size: 13px; font-weight: 300; color: var(--ink-light); line-height: 1.7; }
+
+    /* CONTACTO */
+    #contacto { background: var(--ink); }
+    #contacto .section-label { color: #7ab08a; }
+    #contacto .section-title { color: white; }
+    #contacto .section-sub { color: rgba(255,255,255,.5); }
+    .contact-row { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px; }
+    .contact-col { flex: 1; min-width: 200px; }
+    .contact-col-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 12px; }
+    .contact-col-val { font-size: 15px; color: white; line-height: 1.8; }
+    .contact-col-val a { color: #7ab08a; text-decoration: none; }
+    .cta-row { margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,.1); display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-white { background: white; color: var(--ink); font-size: 14px; font-weight: 500; padding: 14px 28px; text-decoration: none; transition: opacity .2s; display: inline-block; }
+    .btn-white:hover { opacity: .9; }
+
+    /* FOOTER */
+    footer { background: #111110; border-top: 1px solid rgba(255,255,255,.07); padding: 24px 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer p { font-size: 12px; color: rgba(255,255,255,.3); }
+    footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; padding: 120px 20px 60px; gap: 40px; }
+      .hero-right { display: none; }
+      .service-row { grid-template-columns: 1fr; gap: 8px; }
+      .service-detail { text-align: left; }
+      section { padding: 60px 20px; }
+      nav { padding: 0 20px; }
+      .nav-links a { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Morales <span>&</span> Asociados</a>
+  <div class="nav-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#contacto">Contacto</a>
+    <a href="tel:+595021000000" class="nav-cta">Llamar</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-label">Asesoría contable e impositiva · Asunción</p>
+    <h1 class="hero-headline">Su empresa, <em>en orden</em> y con respaldo.</h1>
+    <p class="hero-sub">Acompañamos a empresas y profesionales independientes en Paraguay con asesoría contable, impositiva y laboral. Sin letra chica, sin sorpresas.</p>
+    <div class="hero-actions">
+      <a href="tel:+595021000000" class="btn-primary">Agendar consulta</a>
+      <a href="#servicios" class="btn-text">Ver servicios</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-title">Servicios más solicitados</div>
+    <div class="hero-card-item">
+      <span class="card-item-label">Registro en SET</span>
+      <div class="card-item-val">Desde Gs. 350.000<div class="card-badge">Disponible</div></div>
+    </div>
+    <div class="hero-card-item">
+      <span class="card-item-label">Declaración mensual IVA</span>
+      <div class="card-item-val">Desde Gs. 250.000/mes<div class="card-badge">Disponible</div></div>
+    </div>
+    <div class="hero-card-item">
+      <span class="card-item-label">Liquidación de sueldos</span>
+      <div class="card-item-val">Desde Gs. 180.000/mes<div class="card-badge">Disponible</div></div>
+    </div>
+    <div class="hero-card-item">
+      <span class="card-item-label">Consulta inicial</span>
+      <div class="card-item-val">Sin costo</div>
+    </div>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="container">
+    <p class="section-label">Servicios</p>
+    <h2 class="section-title">Todo lo que su empresa necesita</h2>
+    <p class="section-sub">Trabajamos con personas físicas, empresas unipersonales y sociedades de todo tamaño.</p>
+    <div class="services-list">
+      <div class="service-row">
+        <div class="service-name">Contabilidad general</div>
+        <div class="service-desc">Registro de operaciones, elaboración de estados financieros, libros contables y reportes periódicos para la toma de decisiones.</div>
+        <div class="service-detail">Servicio mensual</div>
+      </div>
+      <div class="service-row">
+        <div class="service-name">Asesoría impositiva</div>
+        <div class="service-desc">Declaraciones de IVA, renta e IRACIS. Optimización fiscal dentro del marco legal. Acompañamiento ante la SET.</div>
+        <div class="service-detail">Servicio mensual</div>
+      </div>
+      <div class="service-row">
+        <div class="service-name">Recursos humanos y nómina</div>
+        <div class="service-desc">Liquidación de sueldos, aportes al IPS, aguinaldos y toda la gestión laboral de su empresa.</div>
+        <div class="service-detail">Servicio mensual</div>
+      </div>
+      <div class="service-row">
+        <div class="service-name">Constitución de empresas</div>
+        <div class="service-desc">Registro ante el MIC, apertura de RUC, habilitaciones municipales y asesoramiento en la estructura legal más conveniente.</div>
+        <div class="service-detail">Servicio puntual</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="container">
+    <p class="section-label">Equipo</p>
+    <h2 class="section-title">Con quién va a trabajar</h2>
+    <p class="section-sub">Profesionales con matrícula activa en el Colegio de Contadores del Paraguay.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-initial">AM</div>
+        <div class="team-name">Alberto Morales</div>
+        <div class="team-role">Contador Público · Director</div>
+        <div class="team-desc">20 años de experiencia en contabilidad empresarial y asesoría impositiva para pymes y empresas exportadoras.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">LP</div>
+        <div class="team-name">Laura Pereira</div>
+        <div class="team-role">Contadora · Recursos humanos</div>
+        <div class="team-desc">Especialista en derecho laboral paraguayo y gestión de nómina para empresas con equipos de hasta 200 personas.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">MG</div>
+        <div class="team-name">Miguel González</div>
+        <div class="team-role">Asesor impositivo</div>
+        <div class="team-desc">Especializado en impuesto a la renta personal e IRACIS. Experiencia en sectores agropecuario, comercial e industrial.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-title">Hablemos de su empresa</h2>
+    <p class="section-sub">La primera consulta es sin costo. Nos conta su situación y le decimos cómo podemos ayudar.</p>
+    <div class="contact-row">
+      <div class="contact-col">
+        <div class="contact-col-label">Dirección</div>
+        <div class="contact-col-val">Av. Mariscal López 1234, piso 3<br/>Asunción, Paraguay</div>
+      </div>
+      <div class="contact-col">
+        <div class="contact-col-label">Horario</div>
+        <div class="contact-col-val">Lunes a viernes<br/>8:00 – 17:30</div>
+      </div>
+      <div class="contact-col">
+        <div class="contact-col-label">Teléfono</div>
+        <div class="contact-col-val"><a href="tel:+595021000000">+595 (021) 000 000</a></div>
+      </div>
+      <div class="contact-col">
+        <div class="contact-col-label">Email</div>
+        <div class="contact-col-val"><a href="mailto:consultas@moralesyasociados.com.py">consultas@moralesyasociados.com.py</a></div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a href="tel:+595021000000" class="btn-white">Llamar ahora</a>
+      <a href="https://wa.me/595971000000" target="_blank" class="btn-white">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Morales & Asociados · Asunción, Paraguay · Mat. CCP 0000</p>
+  <p>Web por <a href="https://idemo.com.py">Idemo Digital</a></p>
+</footer>
+
+</body>
+</html>

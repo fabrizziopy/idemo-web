@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taller Rodríguez — Mecánica General · Asunción</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --bg2: #181818;
+      --bg3: #222222;
+      --accent: #e8c84a;
+      --text: #f0ede8;
+      --muted: #888888;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,15,15,.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-right { display: flex; gap: 24px; align-items: center; }
+    .nav-right a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: .04em; transition: color .2s; }
+    .nav-right a:hover { color: var(--text); }
+    .nav-btn { background: var(--accent); color: #0f0f0f; font-weight: 700; font-size: 13px; padding: 8px 18px; text-decoration: none; letter-spacing: .04em; transition: opacity .2s; }
+    .nav-btn:hover { opacity: .85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding-top: 56px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: .4;
+    }
+    .hero-accent-bar {
+      position: absolute; top: 0; right: 120px;
+      width: 3px; height: 100%; background: var(--accent); opacity: .15;
+    }
+    .hero-content { position: relative; padding: 0 32px 80px; max-width: 900px; }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+    }
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(56px, 10vw, 110px);
+      font-weight: 800; line-height: .95; letter-spacing: -1px;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-headline .dim { color: var(--muted); }
+    .hero-sub { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 480px; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #0f0f0f; font-weight: 700; font-size: 14px; padding: 14px 28px; text-decoration: none; letter-spacing: .04em; transition: opacity .2s; display: inline-block; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-outline { border: 1px solid var(--border); color: var(--muted); font-size: 14px; padding: 14px 28px; text-decoration: none; letter-spacing: .04em; transition: border-color .2s, color .2s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--muted); color: var(--text); }
+    .hero-stats {
+      position: absolute; right: 32px; bottom: 80px;
+      display: flex; flex-direction: column; gap: 24px; text-align: right;
+    }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 800; color: var(--text); line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+    /* SECTION BASE */
+    section { padding: 80px 32px; }
+    .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(32px, 5vw, 48px); font-weight: 800; text-transform: uppercase; letter-spacing: -.5px; line-height: 1.05; margin-bottom: 16px; }
+    .section-sub { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 480px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* SERVICIOS */
+    #servicios { background: var(--bg2); border-top: 1px solid var(--border); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--border); margin-top: 48px; }
+    .service-item { background: var(--bg2); padding: 32px 28px; }
+    .service-num { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: .15em; margin-bottom: 16px; }
+    .service-name { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+    .service-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+
+    /* CONTACTO */
+    #contacto { background: var(--bg); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; }
+    .contact-item { display: flex; flex-direction: column; gap: 4px; padding: 24px 0; border-top: 1px solid var(--border); }
+    .contact-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .contact-val { font-size: 16px; font-weight: 500; color: var(--text); }
+    .contact-val a { color: inherit; text-decoration: none; }
+    .contact-val a:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer p { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 680px) {
+      .hero-stats { display: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 0; }
+      .nav-right a { display: none; }
+      section { padding: 60px 20px; }
+      nav { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Taller <span>Rodríguez</span></a>
+  <div class="nav-right">
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Ubicación</a>
+    <a href="https://wa.me/595971000000" target="_blank" class="nav-btn">WhatsApp</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mecánica general · Asunción, Paraguay · Desde 1998</p>
+    <h1 class="hero-headline">
+      Tu auto<br/>
+      <span class="dim">en buenas</span><br/>
+      manos.
+    </h1>
+    <p class="hero-sub">Más de 25 años arreglando autos en Asunción. Diagnóstico honesto, precios claros, sin sorpresas.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/595971000000?text=Hola%2C%20quiero%20pedir%20un%20turno" target="_blank" class="btn-primary">Pedir turno</a>
+      <a href="#servicios" class="btn-outline">Ver servicios</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">25+</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div>
+      <div class="stat-num">4.000+</div>
+      <div class="stat-label">Autos reparados</div>
+    </div>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="container">
+    <p class="section-label">Lo que hacemos</p>
+    <h2 class="section-title">Servicios</h2>
+    <p class="section-sub">Trabajamos con todas las marcas. Si el problema existe, lo encontramos.</p>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-name">Diagnóstico computarizado</div>
+        <div class="service-desc">Detectamos el problema antes de desarmar nada. Te decimos qué tiene y cuánto cuesta arreglarlo.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-name">Cambio de aceite y filtros</div>
+        <div class="service-desc">Lubricantes de primera marca. Registramos el service para que no pierdas el historial.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-name">Frenos y suspensión</div>
+        <div class="service-desc">Seguridad primero. Revisamos, reemplazamos y te explicamos qué se hizo.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">04</div>
+        <div class="service-name">Motor y transmisión</div>
+        <div class="service-desc">Desde una correa hasta una revisión completa. Experiencia en gasolina y diésel.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">05</div>
+        <div class="service-name">Electricidad</div>
+        <div class="service-desc">Batería, alternador, sistema de encendido, luces. Todo el circuito eléctrico.</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">06</div>
+        <div class="service-name">Aire acondicionado</div>
+        <div class="service-desc">Recarga de gas, reparación de compresor, revisión del sistema de climatización.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <p class="section-label">Encontranos</p>
+    <h2 class="section-title">Dónde estamos</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <span class="contact-label">Dirección</span>
+          <span class="contact-val">Av. Eusebio Ayala 1234, Asunción</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Horario</span>
+          <span class="contact-val">Lunes a viernes 7:30 – 18:00<br/>Sábados 8:00 – 12:00</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Teléfono</span>
+          <span class="contact-val"><a href="tel:+595971000000">+595 971 000 000</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-val"><a href="https://wa.me/595971000000">Escribir ahora</a></span>
+        </div>
+      </div>
+      <div style="background:var(--bg3);min-height:280px;display:flex;align-items:center;justify-content:center;">
+        <p style="font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;">Google Maps</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Taller Rodríguez · Asunción, Paraguay · Est. 1998</p>
+  <p>Web por <a href="https://idemo.com.py" style="color:#e8c84a;text-decoration:none;">Idemo Digital</a></p>
+</footer>
+
+</body>
+</html>

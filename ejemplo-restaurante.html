@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Parrilla de Don Carlos — Restaurante · Asunción</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fdf8f2;
+      --white: #ffffff;
+      --ink: #1c1209;
+      --ink-light: #7a6a58;
+      --accent: #c94b1a;
+      --accent-light: #fef0ea;
+      --warm: #f5e6d3;
+      --border: #e8ddd0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,248,242,.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--ink-light); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-order { background: var(--accent); color: white; font-size: 14px; font-weight: 500; padding: 9px 20px; text-decoration: none; border-radius: 4px; transition: background .2s; }
+    .nav-order:hover { background: #a83c12; }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh; padding-top: 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 60px 48px 60px 32px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 6px 14px; border-radius: 2px; margin-bottom: 28px; width: fit-content; }
+    .hero-headline { font-family: 'Fraunces', serif; font-size: clamp(44px, 6vw, 68px); font-weight: 700; line-height: 1.05; letter-spacing: -.5px; margin-bottom: 20px; }
+    .hero-headline em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .hero-sub { font-size: 16px; font-weight: 300; color: var(--ink-light); line-height: 1.75; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-primary { background: var(--accent); color: white; font-size: 15px; font-weight: 500; padding: 14px 28px; text-decoration: none; border-radius: 4px; transition: background .2s; display: inline-block; }
+    .btn-primary:hover { background: #a83c12; }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--ink-light); font-size: 15px; font-weight: 400; padding: 14px 24px; text-decoration: none; border-radius: 4px; transition: border-color .2s, color .2s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--ink-light); color: var(--ink); }
+    .hero-info { display: flex; gap: 32px; }
+    .info-item { display: flex; flex-direction: column; gap: 2px; }
+    .info-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-light); }
+    .info-val { font-size: 14px; font-weight: 500; }
+    .hero-right { position: relative; background: var(--warm); overflow: hidden; }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      background: linear-gradient(135deg, #f0e0c8 0%, #e8d0b8 100%);
+    }
+    .hero-img-text { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--ink-light); }
+    .hero-badge {
+      position: absolute; bottom: 32px; left: -16px;
+      background: var(--white); border: 1px solid var(--border);
+      padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    }
+    .badge-num { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1; }
+    .badge-text { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+
+    /* MENU */
+    #menu { padding: 80px 32px; background: var(--white); border-top: 1px solid var(--border); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .section-title { font-family: 'Fraunces', serif; font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.15; margin-bottom: 8px; }
+    .section-title em { font-style: italic; font-weight: 300; }
+    .section-sub { font-size: 15px; font-weight: 300; color: var(--ink-light); line-height: 1.7; max-width: 480px; margin-bottom: 48px; }
+    .menu-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .menu-tab { font-size: 14px; font-weight: 500; padding: 12px 24px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--ink-light); transition: color .2s, border-color .2s; background: none; border-top: none; border-left: none; border-right: none; }
+    .menu-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--border); }
+    .menu-item { background: var(--white); padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .menu-item-info {}
+    .menu-item-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .menu-item-desc { font-size: 13px; font-weight: 300; color: var(--ink-light); line-height: 1.5; }
+    .menu-item-price { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+    /* UBICACION */
+    #ubicacion { padding: 80px 32px; background: var(--bg); border-top: 1px solid var(--border); }
+    .ubicacion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 48px; align-items: start; }
+    .contact-block { display: flex; flex-direction: column; gap: 0; }
+    .contact-row-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .contact-row-item:first-child { border-top: 1px solid var(--border); }
+    .contact-row-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px; }
+    .contact-row-val { font-size: 15px; font-weight: 400; line-height: 1.6; }
+    .contact-row-val a { color: var(--accent); text-decoration: none; }
+    .map-placeholder { background: var(--warm); height: 280px; display: flex; align-items: center; justify-content: center; }
+    .map-placeholder p { font-size: 13px; color: var(--ink-light); font-style: italic; }
+    .pedido-banner { background: var(--accent); padding: 32px; margin-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .pedido-text { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: white; }
+    .pedido-sub { font-size: 14px; color: rgba(255,255,255,.7); margin-top: 4px; }
+    .btn-pedido { background: white; color: var(--accent); font-size: 14px; font-weight: 600; padding: 12px 24px; text-decoration: none; border-radius: 4px; white-space: nowrap; transition: opacity .2s; }
+    .btn-pedido:hover { opacity: .9; }
+
+    /* FOOTER */
+    footer { background: var(--ink); padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer p { font-size: 12px; color: rgba(255,255,255,.35); }
+    footer a { color: rgba(255,255,255,.5); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 260px; }
+      .hero-left { padding: 48px 20px; }
+      .ubicacion-grid { grid-template-columns: 1fr; }
+      section, #menu, #ubicacion { padding: 60px 20px; }
+      nav { padding: 0 20px; }
+      .nav-links a { display: none; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">La Parrilla de <span>Don Carlos</span></a>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#ubicacion">Ubicación</a>
+    <a href="https://wa.me/595971000000?text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" class="nav-order">Pedir ahora</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Asunción, Paraguay · Abierto todos los días</div>
+    <h1 class="hero-headline">Parrilla <em>de verdad,</em> como siempre.</h1>
+    <p class="hero-sub">Cortes argentinos, brasa lenta y sazón paraguayo. Desde 1991 en el mismo lugar, con la misma receta.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/595971000000?text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" class="btn-primary">Pedir por WhatsApp</a>
+      <a href="#menu" class="btn-outline">Ver menu</a>
+    </div>
+    <div class="hero-info">
+      <div class="info-item">
+        <span class="info-label">Horario</span>
+        <span class="info-val">11:30 – 23:00</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Reservas</span>
+        <span class="info-val">+595 971 000 000</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Delivery</span>
+        <span class="info-val">Zona norte y centro</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      <div style="font-size:48px;opacity:.3">&#x1F969;</div>
+      <p class="hero-img-text">Foto del local o del plato estrella</p>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-num">33</div>
+      <div class="badge-text">años en Asunción</div>
+    </div>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="container">
+    <p class="section-label">Menu</p>
+    <h2 class="section-title">Lo que <em>sale a la mesa</em></h2>
+    <p class="section-sub">Precios en guaraníes. El menu cambia según la temporada, pero los clásicos siempre están.</p>
+    <div class="menu-tabs">
+      <button class="menu-tab active">Parrilla</button>
+      <button class="menu-tab">Entradas</button>
+      <button class="menu-tab">Guarniciones</button>
+      <button class="menu-tab">Bebidas</button>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Asado de tira</div>
+          <div class="menu-item-desc">500 g a la brasa, con chimichurri de la casa</div>
+        </div>
+        <div class="menu-item-price">Gs. 95.000</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Bife de chorizo</div>
+          <div class="menu-item-desc">Corte argentino, 350 g, punto a elección</div>
+        </div>
+        <div class="menu-item-price">Gs. 110.000</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Entraña</div>
+          <div class="menu-item-desc">Corte fino, bien sazonado, con limón</div>
+        </div>
+        <div class="menu-item-price">Gs. 85.000</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Choripán</div>
+          <div class="menu-item-desc">Chorizo artesanal en pan casero, con salsa criolla</div>
+        </div>
+        <div class="menu-item-price">Gs. 30.000</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Costillas de cerdo</div>
+          <div class="menu-item-desc">Marinadas 12 horas, brasa lenta. Para dos personas</div>
+        </div>
+        <div class="menu-item-price">Gs. 130.000</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Parrillada completa</div>
+          <div class="menu-item-desc">Para 4 personas: asado, chorizo, morcilla, pollo y cerdo</div>
+        </div>
+        <div class="menu-item-price">Gs. 320.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ubicacion">
+  <div class="container">
+    <p class="section-label">Dónde estamos</p>
+    <h2 class="section-title">Vení o pedí <em>a domicilio</em></h2>
+    <div class="ubicacion-grid">
+      <div>
+        <div class="contact-block">
+          <div class="contact-row-item">
+            <div class="contact-row-label">Dirección</div>
+            <div class="contact-row-val">Av. Santa Teresa 1234, Villa Morra<br/>Asunción, Paraguay</div>
+          </div>
+          <div class="contact-row-item">
+            <div class="contact-row-label">Horario</div>
+            <div class="contact-row-val">Todos los días: 11:30 – 23:00<br/>Viernes y sábados hasta las 00:00</div>
+          </div>
+          <div class="contact-row-item">
+            <div class="contact-row-label">Teléfono y WhatsApp</div>
+            <div class="contact-row-val"><a href="https://wa.me/595971000000">+595 971 000 000</a></div>
+          </div>
+          <div class="contact-row-item">
+            <div class="contact-row-label">Delivery</div>
+            <div class="contact-row-val">Villa Morra, Manora, San Lorenzo<br/>y zonas aledañas · Min. Gs. 50.000</div>
+          </div>
+        </div>
+        <div class="pedido-banner">
+          <div>
+            <div class="pedido-text">Pedidos por WhatsApp</div>
+            <div class="pedido-sub">Respondemos en menos de 5 minutos</div>
+          </div>
+          <a href="https://wa.me/595971000000?text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" class="btn-pedido">Escribir ahora</a>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <p>Google Maps integrado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>La Parrilla de Don Carlos · Asunción, Paraguay · Desde 1991</p>
+  <p>Web por <a href="https://idemo.com.py">Idemo Digital</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
